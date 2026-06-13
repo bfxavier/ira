@@ -31,7 +31,7 @@ jobs:
       - name: Build Marp slides
         run: |
           mkdir -p _site
-          npx @marp-team/marp-cli@latest presentations/ --html --allow-local-files -o _site/
+          npx @marp-team/marp-cli@latest -I presentations/ --html --allow-local-files -o _site/
           
       - name: Create Index page
         run: |
