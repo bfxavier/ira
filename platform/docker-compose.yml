@@ -1,18 +1,33 @@
-# For local testing and as a reference for Coolify.
-# Coolify can deploy straight from the Dockerfile — see README.md.
+# Deployable as-is on Coolify (Docker Compose build pack) and locally.
+#
+# Coolify:
+#   - It persists the named volume across redeploys.
+#   - Set the domain in the UI, or set SERVICE_FQDN_POTATOACADEMY_3000 below
+#     to ira.xaviair.dev and Coolify wires the proxy + TLS automatically.
+#   - Set ADMIN_KEY (and optionally TZ) in Coolify's env settings.
+#
+# Local:  docker compose up --build   →  http://localhost:3000
 services:
   potato-academy:
     build: .
-    ports:
-      - "3000:3000"
+    restart: unless-stopped
     environment:
       - PORT=3000
       - DB_PATH=/app/data/potato.db
-      - TZ=Europe/Lisbon          # so streaks roll over on Potato's day
-      - ADMIN_KEY=change-me        # Bruno's peek key (optional)
+      - TZ=${TZ:-Europe/Lisbon}            # streaks roll over on Potato's day
+      - ADMIN_KEY=${ADMIN_KEY:-}           # your peek key (set in Coolify)
+      # Uncomment on Coolify to auto-assign the domain + HTTPS:
+      # - SERVICE_FQDN_POTATOACADEMY_3000=ira.xaviair.dev
+    ports:
+      - "${HOST_PORT:-3000}:3000"
     volumes:
       - potato-data:/app/data
-    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
 volumes:
   potato-data:

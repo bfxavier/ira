@@ -45,23 +45,29 @@ docker compose up --build
 
 ## Deploy on Coolify (ira.xaviair.dev)
 
-1. **New Resource → Docker / Dockerfile** (or "Application" from this Git repo).
-2. **Base Directory:** `/platform`  ·  **Dockerfile:** `platform/Dockerfile`
-   (so the build context is the `platform/` folder).
-3. **Port:** `3000`.
-4. **Persistent storage:** add a volume mounted at **`/app/data`** — this is where
-   `potato.db` lives. Without it, progress resets on every redeploy.
-5. **Environment variables:**
+Deploy with the **Docker Compose** build pack — `docker-compose.yml` is ready to go.
+
+1. **New Resource → Docker Compose** from this Git repo.
+2. **Base Directory:** `/platform` · **Compose file:** `docker-compose.yml`
+   (so the build context and the Dockerfile resolve inside `platform/`).
+3. **Domain:** set the service's domain to `https://ira.xaviair.dev` in the UI
+   (or uncomment `SERVICE_FQDN_POTATOACADEMY_3000` in the compose file). Coolify
+   wires the reverse proxy and HTTPS to the container's port `3000`.
+4. **Environment variables** (Coolify → Environment): set at least
 
    | Var | Value | Why |
    |-----|-------|-----|
-   | `TZ` | `Europe/Lisbon` | streaks roll over on *her* midnight, not UTC |
    | `ADMIN_KEY` | a random string | unlocks your peek endpoint |
-   | `PORT` | `3000` | (already set in the image) |
-   | `DB_PATH` | `/app/data/potato.db` | (already set in the image) |
+   | `TZ` | `Europe/Lisbon` | streaks roll over on *her* midnight, not UTC |
 
-6. **Domain:** point `ira.xaviair.dev` at the app; Coolify handles HTTPS.
-7. Deploy. Done.
+   `PORT` and `DB_PATH` already have sane values baked in.
+5. **Persistent storage:** the `potato-data` named volume (mounted at `/app/data`)
+   is declared in the compose file — Coolify keeps it across redeploys, so her
+   progress survives. Nothing extra to configure.
+6. Deploy. Done.
+
+> Prefer the plain Dockerfile build pack instead? It also works — point Coolify at
+> `platform/Dockerfile`, set port `3000`, and add a persistent volume on `/app/data`.
 
 ## Peeking on her progress (just you)
 
