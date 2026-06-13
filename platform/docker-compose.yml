@@ -1,0 +1,18 @@
+# For local testing and as a reference for Coolify.
+# Coolify can deploy straight from the Dockerfile — see README.md.
+services:
+  potato-academy:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - DB_PATH=/app/data/potato.db
+      - TZ=Europe/Lisbon          # so streaks roll over on Potato's day
+      - ADMIN_KEY=change-me        # Bruno's peek key (optional)
+    volumes:
+      - potato-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  potato-data:

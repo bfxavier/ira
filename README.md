@@ -23,6 +23,11 @@ Start with the **[QA + AI Automation Study Plan](qa-ai-automation-study-plan.md)
 | File | Description |
 |------|-------------|
 | 📖 [`qa-ai-automation-study-plan.md`](qa-ai-automation-study-plan.md) | The core 12-week study and mentoring roadmap. |
+| 🧭 [`mentor-playbook.md`](mentor-playbook.md) | How to mentor — traps, analogies, and per-phase moves. |
+| 🎫 [`tickets/`](tickets/) | Real-ticket simulation: work a ticket end-to-end (branch → PR → review). Builds independence. |
+| 🐍 [`exercises/`](exercises/) | "Broken code" drills she must fix, one per phase. |
+| 🖥️ [`presentations/`](presentations/) | Marp slide decks for each phase. |
+| 🥔 [`platform/`](platform/) | **Potato's QA Academy** — the interactive learning web app (Python-in-browser, XP, streaks). Deploys to ira.xaviair.dev. |
 
 ---
 *Empowering QA engineers to build automated, AI-assisted futures.*

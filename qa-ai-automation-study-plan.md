@@ -395,6 +395,20 @@ Definition of done:
 - She has 5 API tests in Python.
 - She understands status code, request, response, and JSON.
 
+## Interlude: Real-Ticket Simulation
+
+Run alongside Phases 2-4.
+
+Skills are not enough to be the best junior. Independence is. From Phase 2
+onward, have her work the tickets in [`tickets/`](tickets/) — each is a
+Jira-style brief she carries end-to-end: branch, write the test, open a pull
+request, and respond to your review comments.
+
+This is the single highest-leverage habit in the whole plan. A junior who can
+take a ticket and reach a merged PR without help is worth more than one who
+writes fancier code but needs hand-holding. See [`tickets/README.md`](tickets/README.md)
+for the loop and [`tickets/MENTOR-REVIEW.md`](tickets/MENTOR-REVIEW.md) for how to review like a real colleague.
+
 ## Phase 5: AI-Assisted QA Workflow
 
 Duration: weeks 10-11.
